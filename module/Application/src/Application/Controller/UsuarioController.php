@@ -58,6 +58,7 @@ class UsuarioController extends AbstractActionController {
         try {
             $usuario = $this->getUsuarioTable()->getUsuario($id);
         } catch (Exception $ex) {
+            print_r('aqui');
             return $this->redirect()->toUrl('list');
         }
 
@@ -72,7 +73,7 @@ class UsuarioController extends AbstractActionController {
             if ($form->isValid()) {
                 $this->getUsuarioTable()->salvarUsuario($form->getData());
 
-                return $this->redirect()->toUrl("usuario/add");
+                return $this->redirect()->toUrl("/application/usuario/list");
             }
         }
 

@@ -18,6 +18,9 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Permissions\Acl\Acl;
+use Zend\Permissions\Acl\Resource\GenericResource;
+use Zend\Permissions\Acl\Role\GenericRole;
 
 class Module {
 
@@ -27,6 +30,49 @@ class Module {
         $moduleRouteListener->attach($eventManager);
 
         $GLOBALS['sm'] = $e->getApplication()->getServiceManager();
+
+        //para funcionar a autenticacao precisa dessas linhas
+        $application = $e->getApplication();
+
+        $this->configurarAcl($e);
+        $e->getApplication()
+                ->getEventManager()
+                ->attach('route', array(
+                    $this,
+                    'checkAcl'
+        ));
+    }
+
+    public function checkAcl(MvcEvent $e) {
+        $route = $e->getRouteMatch()->getMatchedRouteName();
+        $resource = $e->getRouteMatch()->getParam('controller');
+
+        if (!$this->acl->hasResource($resource))
+            $this->acl->addResource(new GenericResource($resource));
+
+        $perfilId = $this->loadConfiguration($e);
+        if (empty($perfilId)) {
+            if ($route != 'autenticar') {
+                $response = $e->getResponse();
+                $response->getHeaders()->addHeaderLine('Location', $e->getRequest()->getBaseUrl() . '/autenticar/');
+                $response->setStatusCode(404);
+                $response->sendHeaders();
+                exit;
+            }
+        } else {
+            $privilegio = $e->getRouteMatch()->getParam('action');
+
+            // echo  $e->getRouteMatch()->getParam('action');exit;
+            if (!$e->getViewModel()->acl->isAllowed($perfilId, $resource, $privilegio)) {
+                if ($route != 'deny') {
+                    $response = $e->getResponse();
+                    $response->getHeaders()->addHeaderLine('Location', $e->getRequest()->getBaseUrl() . '/deny/');
+                    $response->setStatusCode(404);
+                    $response->sendHeaders();
+                    exit;
+                }
+            }
+        }
     }
 
     public function getConfig() {
@@ -45,16 +91,44 @@ class Module {
 
     public function loadConfiguration(MvcEvent $e) {
 
-//        $application = $e->getApplication();
-        //$sm = $application->getServiceManager();
-        /*
+        $application = $e->getApplication();
+        $sm = $application->getServiceManager();
 
-          if ($sm->get('AuthService')->hasIdentity()) {
-          $usuario = $sm->get('Autenticacao\Model\AutenticacaoStorage')->read();
-          if (!empty($usuario->perfil->id)) {
-          return $usuario->perfil->id;
-          }
-          } */
+
+        if ($sm->get('AuthService')->hasIdentity()) {
+            $usuario = $sm->get('Autenticacao\Model\AutenticacaoStorage')->read();
+            if (!empty($usuario->perfil->id)) {
+                return $usuario->perfil->id;
+            }
+        }
+    }
+
+    public function configurarAcl(MvcEvent $e) {
+        //configurando o metodo de autenticao de perfis
+        $this->acl = new Acl();
+        $aclRoles = include __DIR__ . '/config/module.acl.perfis.php';
+        $allResources = array();
+        $this->acl->addResource(new GenericResource("Application\Controller\Index"));
+        $this->acl->addResource(new GenericResource("Autenticacao\Controller\Auth"));
+
+        foreach ($aclRoles as $valores) {
+            $role = new GenericRole($valores['role']);
+            if (!$this->acl->hasRole(($role)))
+                $this->acl->addRole($role);
+
+            if (!$this->acl->hasResource('deny'))
+                $this->acl->addResource(new GenericResource('deny'));
+
+            if (!$this->acl->hasResource($valores['resource']))
+                $this->acl->addResource(new GenericResource($valores['resource']));
+
+
+            $this->acl->allow($role, $valores['resource'], $valores['privileges']);
+
+            $this->acl->allow($role, 'Application\Controller\Index', array());
+            $this->acl->allow($role, 'Autenticacao\Controller\Auth', array());
+        }
+        $e->getViewModel()->acl = $this->acl;
     }
 
     public function getServiceConfig() {

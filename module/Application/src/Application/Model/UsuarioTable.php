@@ -3,6 +3,7 @@
 namespace Application\Model;
 
 use Exception;
+use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
 
 class UsuarioTable {
@@ -38,7 +39,7 @@ class UsuarioTable {
     public function salvarUsuario(Usuario $usuario) {
         $data = array(
             'login' => $usuario->login,
-            'senha' => $usuario->senha,
+            'senha' => md5($usuario->senha),
             'nome' => $usuario->nome,
             'email' => $usuario->email,
             'user_channel' => $usuario->user_channel,
@@ -64,6 +65,16 @@ class UsuarioTable {
         $this->tableGateway->delete(array(
             'id' => $id
         ));
+    }
+
+    public function getUsuarioIdentidade($login) {
+        $select = new Select();
+        $select->from('usuario')
+                ->columns(array('id', 'nome', 'perfil_id'))
+                ->where(array('login' => $login));
+        $rowset = $this->tableGateway->selectWith($select);
+        $row = $rowset->current();
+        return $row;
     }
 
 }

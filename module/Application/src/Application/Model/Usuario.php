@@ -2,10 +2,10 @@
 
 namespace Application\Model;
 
-use Exception;
-use Zend\InputFilter\Factory as InputFactory;
+use Application\Model\Perfil;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\InputFilter\Factory as InputFactory;
 
 class Usuario {
 
