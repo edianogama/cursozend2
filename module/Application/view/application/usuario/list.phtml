@@ -1,0 +1,50 @@
+<a href="/usuario/add">
+    Novo Usuário
+</a>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Nome
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Canal
+        </th>
+        <th>
+            Perfil
+        </th>
+        <th>
+            Ação
+        </th>
+    </tr>
+    <?php foreach ($usuarios as $usuario): ?>
+        <tr>
+            <td>
+                <?php echo $usuario->id; ?>
+            </td>
+            <td>
+                <?php echo $usuario->nome; ?>
+            </td>
+            <td>
+                <?php echo $usuario->email; ?>
+            </td>
+            <td>
+                <?php echo $usuario->user_channel; ?>
+            </td>
+            <td>
+                <?php echo $usuario->perfil->nome; ?>
+            </td>
+            <td>
+                <a href="<?php echo $this->basePath('application/usuario/edit/' . $usuario->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+                <a href="<?php echo $this->basePath('application/usuario/delete/' . $usuario->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+
