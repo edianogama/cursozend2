@@ -1,8 +1,8 @@
 <?php
 
-use Zend\Form\Form;
-
 namespace Application\Form;
+
+use Zend\Form\Form;
 
 class PerfilForm extends Form {
 

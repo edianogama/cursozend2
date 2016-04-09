@@ -8,14 +8,24 @@ return array(
         'privileges' => array(
             'list',
             'add',
-            'edit'
+            'edit',
+            'delete'
         ),
         'role' => 1,
         'resource' => 'Application\Controller\Usuario',
         'privileges' => array(
             'list',
             'add',
-            'edit'
+            'edit',
+            'delete'
+        ),
+        'role' => 1,
+        'resource' => 'Application\Controller\Perfil',
+        'privileges' => array(
+            'list',
+            'add',
+            'edit',
+            'delete'
         ),
     )
 );

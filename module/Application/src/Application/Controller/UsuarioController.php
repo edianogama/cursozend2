@@ -58,7 +58,6 @@ class UsuarioController extends AbstractActionController {
         try {
             $usuario = $this->getUsuarioTable()->getUsuario($id);
         } catch (Exception $ex) {
-            print_r('aqui');
             return $this->redirect()->toUrl('list');
         }
 
