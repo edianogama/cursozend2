@@ -10,6 +10,7 @@
 
 namespace Application;
 
+use Application\Controller\CanalController;
 use Application\Controller\IndexController;
 use Application\Controller\PerfilController;
 use Application\Controller\UsuarioController;
@@ -51,6 +52,20 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Application\Controller\Perfil',
+                        'action' => 'list',
+                    ),
+                ),
+            ),
+            'canal' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/canal[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Canal',
                         'action' => 'list',
                     ),
                 ),
@@ -109,7 +124,8 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => IndexController::class,
             'Application\Controller\Usuario' => UsuarioController::class,
-            'Application\Controller\Perfil' => PerfilController::class
+            'Application\Controller\Perfil' => PerfilController::class,
+            'Application\Controller\Canal' => CanalController::class
         ),
     ),
     'view_manager' => array(

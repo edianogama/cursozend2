@@ -10,6 +10,8 @@
 
 namespace Application;
 
+use Application\Model\Canal;
+use Application\Model\CanalTable;
 use Application\Model\Perfil;
 use Application\Model\PerfilTable;
 use Application\Model\Usuario;
@@ -155,6 +157,17 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Perfil());
                     return new TableGateway('perfil', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Application\Model\CanalTable' => function($sm) {
+                    $tableGateway = $sm->get('CanalTableGateway');
+                    $table = new CanalTable($tableGateway);
+                    return $table;
+                },
+                'CanalTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Canal());
+                    return new TableGateway('canal', $dbAdapter, null, $resultSetPrototype);
                 }
             ),
         );

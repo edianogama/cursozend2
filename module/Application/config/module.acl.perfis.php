@@ -27,5 +27,13 @@ return array(
             'edit',
             'delete'
         ),
+        'role' => 1,
+        'resource' => 'Application\Controller\Canal',
+        'privileges' => array(
+            'list',
+            'add',
+            'edit',
+            'delete'
+        ),
     )
 );
