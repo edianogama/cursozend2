@@ -6,7 +6,7 @@ use Exception;
 use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
 
-class VideoTable {
+class UsuarioTable {
 
     protected $tableGateway;
 

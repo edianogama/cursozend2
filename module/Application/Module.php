@@ -66,7 +66,8 @@ class Module {
         } else {
             $privilegio = $e->getRouteMatch()->getParam('action');
 
-            // echo  $e->getRouteMatch()->getParam('action');exit;
+            //echo $e->getRouteMatch()->getParam('action');
+            //exit;
             if (!$e->getViewModel()->acl->isAllowed($perfilId, $resource, $privilegio)) {
                 if ($route != 'deny') {
                     $response = $e->getResponse();

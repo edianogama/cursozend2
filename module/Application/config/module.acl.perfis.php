@@ -11,14 +11,19 @@ return array(
             'edit',
             'delete'
         ),
+    ),
+    array(
         'role' => 1,
         'resource' => 'Application\Controller\Usuario',
         'privileges' => array(
+            'index',
             'list',
             'add',
             'edit',
             'delete'
         ),
+    ),
+    array(
         'role' => 1,
         'resource' => 'Application\Controller\Perfil',
         'privileges' => array(
@@ -27,6 +32,7 @@ return array(
             'edit',
             'delete'
         ),
+    ), array(
         'role' => 1,
         'resource' => 'Application\Controller\Canal',
         'privileges' => array(
@@ -35,6 +41,8 @@ return array(
             'edit',
             'delete'
         ),
+    ),
+    array(
         'role' => 1,
         'resource' => 'Application\Controller\Video',
         'privileges' => array(
