@@ -1,3 +1,6 @@
+<a href="/canal/add" class="btn btn-info">
+    <i class="glyphicon glyphicon-plus"></i> Novo Canal
+</a>
 <table class="table table-bordered">
     <tr>
         <th>
@@ -27,16 +30,11 @@
                 <?php echo $canal->url; ?>
             </td>
             <td>
-                <a href="<?php echo $this->basePath('application/canal/edit/' . $canal->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
-                <a href="<?php echo $this->basePath('application/canal/delete/' . $canal->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                <a href="<?php echo $this->basePath('canal/edit/' . $canal->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+                <a href="<?php echo $this->basePath('canal/delete/' . $canal->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
-<div class="row">
-    <nav class="menu">
-        <li><a href="/canal/add">Adicionar Canal</a></li>
-    </nav>
-</div>
 
 

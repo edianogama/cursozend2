@@ -59,7 +59,7 @@ class Usuario {
                                 'name' => 'StringLength',
                                 'options' => array(
                                     'encoding' => 'UTF-8',
-                                    'min' => 3,
+                                    'min' => 1,
                                     'max' => 100,
                                 ),
                             ),
@@ -77,7 +77,7 @@ class Usuario {
                                 'options' => array(
                                     'encoding' => 'UTF-8',
                                     'min' => 1,
-                                    'max' => 100,
+                                    'max' => 255,
                                 ),
                             ),
                         ),
@@ -139,7 +139,7 @@ class Usuario {
         return array(
             'id' => $this->id,
             'login' => $this->login,
-            'senha' => $this->senha,
+            'senha' => md5($this->senha),
             'nome' => $this->nome,
             'user_channel' => $this->user_channel,
             'email' => $this->email,

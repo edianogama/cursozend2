@@ -66,12 +66,11 @@ class UsuarioController extends AbstractActionController {
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+
             $form->setInputFilter($usuario->getInputFilter());
             $form->setData($request->getPost());
-
             if ($form->isValid()) {
                 $this->getUsuarioTable()->salvarUsuario($form->getData());
-
                 return $this->redirect()->toUrl("/application/usuario/list");
             }
         }

@@ -1,3 +1,6 @@
+<a href="/perfil/add" class="btn btn-info">
+    <i class="glyphicon glyphicon-plus"></i> Novo Perfil
+</a>
 <table class="table table-bordered">
     <tr>
         <th>
@@ -19,16 +22,10 @@
                 <?php echo $perfil->nome; ?>
             </td>
             <td>
-                <a href="<?php echo $this->basePath('application/perfil/edit/' . $perfil->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
-                <a href="<?php echo $this->basePath('application/perfil/delete/' . $perfil->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                <a href="<?php echo $this->basePath('perfil/edit/' . $perfil->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+                <a href="<?php echo $this->basePath('perfil/delete/' . $perfil->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
-<div class="row">
-    <nav class="menu">
-        <li><a href="/application/perfil/add">Adicionar perfil</a></li>
-    </nav>
-</div>
-
 

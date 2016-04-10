@@ -9,6 +9,7 @@ $form->setAttribute('action', $this->basePath('application/usuario/add'));
 $form->prepare();
 ?>
 <div class="page-header">
+
     <?php echo $this->form()->openTag($form); ?>
     <?php echo $this->formHidden($form->get('id')); ?>
     <div class="form-group">
@@ -18,7 +19,7 @@ $form->prepare();
         </div>
     </div>
     <div class="form-group">
-        <label for="user_channel" class="col-sm-2 control-label">Nome de Usuário</label>
+        <label for="user_channel" class="col-sm-2 control-label">Nome de Usuário (Youtube)</label>
         <div class="col-sm-3">
             <?php echo $this->formRow($form->get('user_channel')); ?>
         </div>
@@ -30,7 +31,7 @@ $form->prepare();
         </div>
     </div>
     <div class="form-group">
-        <label for="login" class="col-sm-2 control-label">Email</label>
+        <label for="login" class="col-sm-2 control-label">Login</label>
         <div class="col-sm-3">
             <?php echo $this->formRow($form->get('login')); ?>
         </div>

@@ -1,5 +1,5 @@
-<a href="/video/add">
-    Novo Video
+<a href="/video/add" class="btn btn-info">
+    <i class="glyphicon glyphicon-plus"></i> Novo Video
 </a>
 <table class="table">
     <tr>
@@ -40,8 +40,8 @@
                 <?php echo $video->data_adicionada; ?>
             </td>
             <td>
-                <a href="<?php echo $this->basePath('application/video/edit/' . $video->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
-                <a href="<?php echo $this->basePath('application/video/delete/' . $video->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                <a href="<?php echo $this->basePath('video/edit/' . $video->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+                <a href="<?php echo $this->basePath('video/delete/' . $video->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>

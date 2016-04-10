@@ -1,5 +1,5 @@
-<a href="/usuario/add">
-    Novo Usuário
+<a href="/usuario/add" class="btn btn-info">
+    <i class="glyphicon glyphicon-plus"></i> Novo Usuário
 </a>
 <table class="table">
     <tr>
@@ -40,8 +40,8 @@
                 <?php echo $usuario->perfil->nome; ?>
             </td>
             <td>
-                <a href="<?php echo $this->basePath('application/usuario/edit/' . $usuario->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
-                <a href="<?php echo $this->basePath('application/usuario/delete/' . $usuario->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                <a href="<?php echo $this->basePath('usuario/edit/' . $usuario->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+                <a href="<?php echo $this->basePath('usuario/delete/' . $usuario->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>
