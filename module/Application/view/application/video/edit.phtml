@@ -1,0 +1,45 @@
+<?php
+$title = 'Editar o Video';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->basePath('application/video/edit'));
+$form->prepare();
+?>
+<div class="page-header">
+    <?php echo $this->form()->openTag($form); ?>
+    <?php echo $this->formHidden($form->get('id')); ?>
+    <?php echo $this->formHidden($form->get('data_adicionada')); ?>
+    <div class="form-group">
+        <label for="titulo" class="col-sm-2 control-label">Titulo</label>
+        <div class="col-sm-3">
+            <?php echo $this->formRow($form->get('titulo')); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tamanho" class="col-sm-2 control-label">Tamanho</label>
+        <div class="col-sm-3">
+            <?php echo $this->formRow($form->get('tamanho')); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="url" class="col-sm-2 control-label">URL</label>
+        <div class="col-sm-3">
+            <?php echo $this->formRow($form->get('url')); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="data_adicionada" class="col-sm-2 control-label">URL</label>
+        <div class="col-sm-3">
+            <?php echo $this->formRow($form->get('data_adicionada')); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <?php echo $this->formSubmit($form->get('submit')); ?>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>

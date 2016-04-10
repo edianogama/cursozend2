@@ -16,6 +16,8 @@ use Application\Model\Perfil;
 use Application\Model\PerfilTable;
 use Application\Model\Usuario;
 use Application\Model\UsuarioTable;
+use Application\Model\Video;
+use Application\Model\VideoTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\ModuleRouteListener;
@@ -168,6 +170,17 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Canal());
                     return new TableGateway('canal', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Application\Model\VideoTable' => function($sm) {
+                    $tableGateway = $sm->get('VideoTableGateway');
+                    $table = new VideoTable($tableGateway);
+                    return $table;
+                },
+                'VideoTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Video());
+                    return new TableGateway('video', $dbAdapter, null, $resultSetPrototype);
                 }
             ),
         );

@@ -17,7 +17,7 @@ class CanalTable {
     public function fetchAll() {
         $select = new Select();
         $select->from('canal')
-                ->columns(array('id', 'nome'));
+                ->columns(array('*'));
         $resultSet = $this->tableGateway->selectWith($select);
         return $resultSet;
     }

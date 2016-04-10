@@ -35,5 +35,13 @@ return array(
             'edit',
             'delete'
         ),
+        'role' => 1,
+        'resource' => 'Application\Controller\Video',
+        'privileges' => array(
+            'list',
+            'add',
+            'edit',
+            'delete'
+        ),
     )
 );

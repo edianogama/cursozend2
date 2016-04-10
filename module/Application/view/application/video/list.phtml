@@ -1,0 +1,50 @@
+<a href="/video/add">
+    Novo Video
+</a>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Titulo
+        </th>
+        <th>
+            Tamanho
+        </th>
+        <th>
+            URL
+        </th>
+        <th>
+            Data de Adição
+        </th>
+        <th>
+            Ação
+        </th>
+    </tr>
+    <?php foreach ($videos as $video): ?>
+        <tr>
+            <td>
+                <?php echo $video->id; ?>
+            </td>
+            <td>
+                <?php echo $video->titulo; ?>
+            </td>
+            <td>
+                <?php echo $video->tamanho; ?>
+            </td>
+            <td>
+                <?php echo $video->url; ?>
+            </td>
+            <td>
+                <?php echo $video->data_adicionada; ?>
+            </td>
+            <td>
+                <a href="<?php echo $this->basePath('application/video/edit/' . $video->id) ?>"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+                <a href="<?php echo $this->basePath('application/video/delete/' . $video->id) ?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+

@@ -14,6 +14,7 @@ use Application\Controller\CanalController;
 use Application\Controller\IndexController;
 use Application\Controller\PerfilController;
 use Application\Controller\UsuarioController;
+use Application\Controller\VideoController;
 
 return array(
     'router' => array(
@@ -66,6 +67,20 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Application\Controller\Canal',
+                        'action' => 'list',
+                    ),
+                ),
+            ),
+            'video' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/video[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Video',
                         'action' => 'list',
                     ),
                 ),
@@ -125,7 +140,8 @@ return array(
             'Application\Controller\Index' => IndexController::class,
             'Application\Controller\Usuario' => UsuarioController::class,
             'Application\Controller\Perfil' => PerfilController::class,
-            'Application\Controller\Canal' => CanalController::class
+            'Application\Controller\Canal' => CanalController::class,
+            'Application\Controller\Video' => VideoController::class
         ),
     ),
     'view_manager' => array(

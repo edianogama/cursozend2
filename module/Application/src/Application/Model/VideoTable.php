@@ -3,7 +3,6 @@
 namespace Application\Model;
 
 use Exception;
-use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
 
 class VideoTable {
@@ -24,7 +23,7 @@ class VideoTable {
         return $resultSet;
     }
 
-    public function getUsuario($id) {
+    public function getVideo($id) {
         $id = (int) $id;
         $rowset = $this->tableGateway->select(array(
             'id' => $id
@@ -36,22 +35,22 @@ class VideoTable {
         return $row;
     }
 
-    public function salvarUsuario(Usuario $usuario) {
+    public function salvarVideo(Video $video) {
+        $data_adicionada = empty($this->data_adicionada) ? date("Y-m-d") : $this->data_adicionada;
         $data = array(
-            'login' => $usuario->login,
-            'senha' => md5($usuario->senha),
-            'nome' => $usuario->nome,
-            'email' => $usuario->email,
-            'user_channel' => $usuario->user_channel,
-            'perfil_id' => $usuario->perfil->id,
+            'titulo' => $video->titulo,
+            'tamanho' => $video->tamanho,
+            'url' => $video->url,
+            'data_adicionada' => $data_adicionada,
+                // 'perfil_id' => $usuario->perfil->id,
         );
 
-        $id = (int) $usuario->id;
+        $id = (int) $video->id;
 
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
-            if ($this->getUsuario($id)) {
+            if ($this->getVideo($id)) {
                 $this->tableGateway->update($data, array(
                     'id' => $id
                 ));
@@ -61,20 +60,20 @@ class VideoTable {
         }
     }
 
-    public function deletarUsuario($id) {
+    public function deletarVideo($id) {
         $this->tableGateway->delete(array(
             'id' => $id
         ));
     }
 
-    public function getUsuarioIdentidade($login) {
-        $select = new Select();
-        $select->from('usuario')
-                ->columns(array('id', 'nome', 'perfil_id'))
-                ->where(array('login' => $login));
-        $rowset = $this->tableGateway->selectWith($select);
-        $row = $rowset->current();
-        return $row;
-    }
-
+    /* public function getVideoIdentidade($login) {
+      $select = new Select();
+      $select->from('usuario')
+      ->columns(array('id', 'nome', 'perfil_id'))
+      ->where(array('login' => $login));
+      $rowset = $this->tableGateway->selectWith($select);
+      $row = $rowset->current();
+      return $row;
+      }
+     */
 }
